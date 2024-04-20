@@ -3,7 +3,7 @@ fn get_prime_from_index(n: usize) -> usize {
 }
 
 pub fn get_primes_in_range(n: usize) -> Vec<usize> {
-    let sieve_size = (n / 2) - 1;
+    let sieve_size = (n - 1) / 2;
     let mut sieve = vec![true; sieve_size];
     let mut result: Vec<usize> = vec![2];
 
@@ -36,5 +36,13 @@ mod tests {
                 83, 89, 97
             ]
         );
+    }
+
+    #[test]
+    fn it_gets_the_last_prime_at_the_end_of_the_range() {
+        assert_eq!(get_primes_in_range(2), vec![2]);
+        assert_eq!(get_primes_in_range(3), vec![2, 3]);
+        assert_eq!(get_primes_in_range(5), vec![2, 3, 5]);
+        assert_eq!(get_primes_in_range(7), vec![2, 3, 5, 7]);
     }
 }
