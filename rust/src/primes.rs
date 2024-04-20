@@ -1,0 +1,40 @@
+fn get_prime_from_index(n: usize) -> usize {
+    (n + 1) * 2 + 1
+}
+
+pub fn get_primes_in_range(n: usize) -> Vec<usize> {
+    let sieve_size = (n / 2) - 1;
+    let mut sieve = vec![true; sieve_size];
+    let mut result: Vec<usize> = vec![2];
+
+    for i in 0..sieve_size {
+        if !sieve[i] {
+            continue;
+        }
+
+        let prime = get_prime_from_index(i);
+        result.push(prime);
+
+        for j in (i + prime..sieve_size).step_by(prime) {
+            sieve[j] = false;
+        }
+    }
+
+    result
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::primes::get_primes_in_range;
+
+    #[test]
+    fn it_gets_the_primes_from_2_to_100() {
+        assert_eq!(
+            get_primes_in_range(100),
+            vec![
+                2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79,
+                83, 89, 97
+            ]
+        );
+    }
+}
