@@ -3,9 +3,15 @@ fn get_prime_from_index(n: usize) -> usize {
 }
 
 pub fn get_primes_in_range(n: usize) -> Vec<usize> {
+    if (n < 2) {
+        return vec![];
+    }
+
     let sieve_size = (n - 1) / 2;
     let mut sieve = vec![true; sieve_size];
     let mut result: Vec<usize> = vec![2];
+
+    // TODO make sure to return an empty list when n is less than 2
 
     for i in 0..sieve_size {
         if !sieve[i] {
@@ -44,5 +50,11 @@ mod tests {
         assert_eq!(get_primes_in_range(3), vec![2, 3]);
         assert_eq!(get_primes_in_range(5), vec![2, 3, 5]);
         assert_eq!(get_primes_in_range(7), vec![2, 3, 5, 7]);
+    }
+
+    #[test]
+    fn it_returns_empty_when_the_range_does_not_include_any_primes() {
+        assert_eq!(get_primes_in_range(0), vec![]);
+        assert_eq!(get_primes_in_range(1), vec![]);
     }
 }
