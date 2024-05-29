@@ -3,7 +3,7 @@ fn get_prime_from_index(n: usize) -> usize {
 }
 
 pub fn get_primes_in_range(n: usize) -> Vec<usize> {
-    if (n < 2) {
+    if n < 2 {
         return vec![];
     }
 
